@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ps_store_fe/home_screen/components/title_with_custom_underline.dart';
 
 import '../../constants.dart';
 
-
-class TitleWithMoreButton extends StatelessWidget {
+class TitleWithMoreButton extends StatefulWidget {
   const TitleWithMoreButton({
     Key? key,
     required this.title,
@@ -14,60 +14,116 @@ class TitleWithMoreButton extends StatelessWidget {
   final Function press;
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-      child: Row(
-        children: [
-          TitleWithCustomUnderline(text: title),
-          Spacer(),
-          FlatButton(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            color: kPrimaryColor,
-            onPressed: (){},
-            child: Text(
-              "More",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  State<StatefulWidget> createState() => _InputUserState();
 }
 
-class TitleWithCustomUnderline extends StatelessWidget {
-  const TitleWithCustomUnderline({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
+class _InputUserState extends State<TitleWithMoreButton> {
+  final textController = TextEditingController();
 
-  final String text;
+  void changeText() {
+    setState(() {
+      textController.text;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Container(
-      height: 24,
-      child: Stack(
+      margin: EdgeInsets.only(bottom: kDefaultPadding * 1.0),
+      height: size.height * 0.12,
+      child: Row(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: kDefaultPadding / 4),
-            child: Text(
-              text,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
+          TitleWithCustomUnderline(text: "sad"),
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              changeText();
+            },
           ),
-          Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                  margin: EdgeInsets.only(right: kDefaultPadding / 4),
-                  height: 7,
-                  color: kPrimaryColor.withOpacity(0.2)))
+          Tesasde(),
         ],
       ),
     );
   }
 }
+
+class Tesasde extends StatelessWidget {
+  const Tesasde({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 123, 106, 106),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(255, 152, 34, 34),
+            offset: Offset(0, 2),
+            blurRadius: 5.0,
+          ),
+        ],
+      ),
+      child: TextField(
+        // controller: _searchController,
+        decoration: InputDecoration(
+            prefixIcon: Icon(Icons.search),
+            // suffixIcon: IconButton(
+            //   icon: Icon(Icons.clear),
+            //   // onPressed: () {
+            //   //   _searchController.clear();
+            //   // },
+            // ),
+            border: InputBorder.none,
+            hintText: 'Search'),
+      ),
+    );
+  }
+}
+
+// class SearchBox extends StatefulWidget {
+//   @override
+//   _SearchBoxState createState() => _SearchBoxState();
+// }
+
+// class _SearchBoxState extends State<SearchBox> {
+//   TextEditingController _searchController = TextEditingController();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: EdgeInsets.all(10),
+//       decoration: BoxDecoration(
+//         color: Color.fromARGB(255, 123, 106, 106),
+//         borderRadius: BorderRadius.circular(10),
+//         boxShadow: [
+//           BoxShadow(
+//             color: Color.fromARGB(255, 152, 34, 34),
+//             offset: Offset(0, 2),
+//             blurRadius: 5.0,
+//           ),
+//         ],
+//       ),
+//       child: TextField(
+//         controller: _searchController,
+//         decoration: InputDecoration(
+//             prefixIcon: Icon(Icons.search),
+//             suffixIcon: IconButton(
+//               icon: Icon(Icons.clear),
+//               onPressed: () {
+//                 _searchController.clear();
+//               },
+//             ),
+//             border: InputBorder.none,
+//             hintText: 'Search'),
+//       ),
+//     );
+//   }
+// }
